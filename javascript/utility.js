@@ -13,3 +13,7 @@ function getFieldValue(id, isValue) {
 
     return value;
 }
+
+function createElement(elementName) {
+    return document.createElement(elementName);
+}
