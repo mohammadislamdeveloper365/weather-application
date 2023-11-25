@@ -9,7 +9,7 @@
 }
 
 #search-container {
-    padding:5rem;
+    padding:2rem 5rem;
     width:60%;
     margin:auto;
     display: flex;
@@ -33,3 +33,18 @@
     border-radius: 5px;
 }
 
+#weather-details-container {
+    display: flex;
+    width:60%;
+    margin: auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-details {
+    font-size: 2rem;
+    padding:0.5rem;
+    font-weight: 800;
+    color:white;
+}
