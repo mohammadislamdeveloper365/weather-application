@@ -48,3 +48,12 @@
     font-weight: 800;
     color:white;
 }
+
+#weather-footer {
+    height: 200px;
+    padding: 4rem;
+    text-align: center;
+    background-color: black;
+    color:white;
+    font-size: 2.5rem;
+}

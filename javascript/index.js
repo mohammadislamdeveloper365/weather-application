@@ -1,6 +1,4 @@
 const key = '8ff5d99de10e7c1162e35fccc86c098c';
-
-
 const searchButton = getElementById('weather-search-button');
 
 searchButton.addEventListener('click', function() {
@@ -9,18 +7,18 @@ searchButton.addEventListener('click', function() {
 });
 
 loadWeather();
-function loadWeather(cityName) {
+function loadWeather(cityName = 'london') {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}&units=metric`;
     
     fetch(url)
     .then(response => response.json())
-    .then(data => displayWeatherDetails(data))
-    .catch(error=>console.log(error.message));
+    .then(data => displayWeatherDetails(data));
 }
 
 function displayWeatherDetails(weatherDetails) {
     const parentContainer = getElementById('weather-container');
     let weatherDetailsContainer = getElementById('weather-details-container');
+    
     if(weatherDetailsContainer) {
         weatherDetailsContainer.innerHTML = '';
     } else {
@@ -43,5 +41,35 @@ function displayWeatherDetails(weatherDetails) {
     cityNameElement.classList.add('weather-details');
     temperatureElement.classList.add('weather-details');
     weatherConditionElement.classList.add('weather-details');
-    console.log(weatherDetails)
+    if(weatherDetails?.weather?.[0].main.toLowerCase() === 'haze') {
+        parentContainer.style.backgroundImage = 'url("../resources/hazy.jpg")';
+        const weatherDetailsElements = document.getElementsByClassName('weather-details');
+        for(let x  of weatherDetailsElements) {
+            x.style.color = 'blue';
+        }
+    } else if(weatherDetails?.weather?.[0].main.toLowerCase() === 'clear') {
+        parentContainer.style.backgroundImage = 'url("../resources/clear.jpg")';
+    } else if(weatherDetails?.weather?.[0].main.toLowerCase() === 'rain') {
+        parentContainer.style.backgroundImage = 'url("../resources/rainy.jpg")';
+        const weatherDetailsElements = document.getElementsByClassName('weather-details');
+        for(let x  of weatherDetailsElements) {
+            x.style.color = 'black';
+        }
+    } else if(weatherDetails?.weather?.[0].main.toLowerCase() === 'clouds') {
+        parentContainer.style.backgroundImage = 'url("../resources/cloudy.jpg")';
+        const weatherDetailsElements = document.getElementsByClassName('weather-details');
+        for(let x  of weatherDetailsElements) {
+            x.style.color = 'rgb(76 75 222)';
+        }
+    } else if(weatherDetails?.weather?.[0].main.toLowerCase() === 'snow') {
+        parentContainer.style.backgroundImage = 'url("../resources/snow.avif")';
+        const weatherDetailsElements = document.getElementsByClassName('weather-details');
+        for(let x  of weatherDetailsElements) {
+            x.style.color = '#d53800';
+        }
+    } else {
+        parentContainer.style.backgroundImage = 'url("../resources/summer.jpg")'
+    }
+    parentContainer.style.backgroundSize = 'cover';
+    parentContainer.style.backgroundRepeat = 'no-repeat';
 }
